@@ -1,5 +1,6 @@
 package com.example.library.studentlibrary.services;
 
+import com.example.library.studentlibrary.models.Card;
 import com.example.library.studentlibrary.models.Student;
 import com.example.library.studentlibrary.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,8 @@ public class StudentService {
     }
 
     public void createStudent(Student student){
-        studentRepository4.save(student);
+
+        Card newCard = cardService4.createAndReturn(student);
     }
 
     public void updateStudent(Student student){
@@ -39,7 +41,7 @@ public class StudentService {
 
     public void deleteStudent(int id){
         //Delete student and deactivate corresponding card
-        studentRepository4.deleteById(id);
+        studentRepository4.deleteCustom(id);
         cardService4.deactivateCard(id);
     }
 }
